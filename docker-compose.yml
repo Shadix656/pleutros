@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: pleutros-database
+    image: mariadb:10.2
+    volumes:
+      - pleutros-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pleutros
+      - MYSQL_USER=pleutros
+      - MYSQL_PASSWORD=pleutros
+    ports:
+      - "3336:3306"
+  adonis_app:
+    container_name: adonis_app
+    build: docker/adonisjs
+    volumes:
+      - ./:/app
+    working_dir: /app
+    ports:
+      - 3333:3333
+
+volumes:
+  pleutros-data:
