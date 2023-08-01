@@ -9,7 +9,22 @@ export default class Party extends BaseModel {
   public name: string
 
   @column()
-  public is_private: boolean
+  public is_private: boolean = true
+
+  @column()
+  public short_description: string
+
+  @column()
+  public description: string
+
+  @column()
+  public address: string
+
+  @column()
+  public city: string
+
+  @column()
+  public zipcode: Number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
