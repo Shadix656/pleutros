@@ -19,12 +19,15 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-Route.resource('parties', 'PartiesController').apiOnly()
+import AutoSwagger from 'adonis-autoswagger'
+import swagger from 'Config/swagger'
 
-Route.get('/', async () => {
-  return { hello: 'test' }
+Route.get('/swagger', async () => {
+  return AutoSwagger.docs(Route.toJSON(), swagger)
 })
 
-Route.get('/test', async () => {
-  return { test: 'hello world' }
+Route.get('/docs', async () => {
+  return AutoSwagger.ui('/swagger')
 })
+
+Route.resource('parties', 'PartiesController').except(['create', 'edit'])
