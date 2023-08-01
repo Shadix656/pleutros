@@ -37,7 +37,6 @@ export default class PartiesController {
   /**
    * @store
    * @responseBody 200
-   * @responseDoby 404 - Aucune soirée ne corresponds à l'id donné.
    * @requestBody <Party>
    */
   public async store({ request, response }) {

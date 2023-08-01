@@ -30,4 +30,7 @@ Route.get('/docs', async () => {
   return AutoSwagger.ui('/swagger')
 })
 
+Route.post('/auth/register', 'AuthController.register')
+Route.post('/auth/login', 'AuthController.login')
+
 Route.resource('parties', 'PartiesController').except(['create', 'edit'])

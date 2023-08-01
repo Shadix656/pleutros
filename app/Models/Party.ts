@@ -24,7 +24,7 @@ export default class Party extends BaseModel {
   public city: string
 
   @column()
-  public zipcode: Number
+  public zipcode: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
