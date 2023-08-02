@@ -1,5 +1,4 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Party from 'App/Models/Party'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
@@ -9,7 +8,7 @@ export default class PartiesController {
    * @description Retourne la liste de soirée.
    * @responseBody 200 - <Party>.with(relations)
    */
-  public async index({ response }) {
+  public async index({ response }: HttpContextContract) {
     const parties: Party[] = await Party.all()
 
     return response.ok(parties)
@@ -22,7 +21,7 @@ export default class PartiesController {
    * @responseBody 200 - <Party>.with(party, party.relation)
    * @responseBody 404
    */
-  public async show({ params, response }) {
+  public async show({ params, response }: HttpContextContract) {
     const { id }: { id: Number } = params
 
     const party: any = await Party.find(id)
@@ -38,7 +37,7 @@ export default class PartiesController {
    * @responseBody 200
    * @requestBody <Party>
    */
-  public async store({ request, response }) {
+  public async store({ request, response }: HttpContextContract) {
     const partiesSchema = schema.create({
       name: schema.string({ trim: true }, [rules.maxLength(255)]),
       is_private: schema.boolean(),
@@ -57,7 +56,7 @@ export default class PartiesController {
    * @reponseBody 404 - Aucune soirée ne corresponds à l'id donné.
    * @requestBody <Party>
    */
-  public async update({ request, params, response }) {
+  public async update({ request, params, response }: HttpContextContract) {
     const partiesSchema = schema.create({
       name: schema.string({ trim: true }, [rules.maxLength(255)]),
       is_private: schema.boolean(),
@@ -86,7 +85,7 @@ export default class PartiesController {
    * @responseBody 200
    * @responseBody 404 - Aucune soirée ne corresponds à l'id donné.
    */
-  public async destroy({ params, response }) {
+  public async destroy({ params, response }: HttpContextContract) {
     const { id }: { id: Number } = params
 
     const party: any = await Party.find(id)
