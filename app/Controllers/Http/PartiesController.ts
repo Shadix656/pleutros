@@ -1,8 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Party from 'App/Models/Party'
-import { schema } from '@adonisjs/validator/build/src/Schema'
-import { rules } from '@adonisjs/validator/build/src/Rules'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export default class PartiesController {
   /**
