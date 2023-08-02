@@ -9,7 +9,7 @@ export default class PartiesController {
    * @responseBody 200 - <Party>.with(relations)
    */
   public async index({ response }: HttpContextContract) {
-    const parties: Party[] = await Party.all()
+    const parties = await Party.all()
 
     return response.ok(parties)
   }
@@ -22,9 +22,9 @@ export default class PartiesController {
    * @responseBody 404
    */
   public async show({ params, response }: HttpContextContract) {
-    const { id }: { id: Number } = params
+    const { id } = params
 
-    const party: any = await Party.find(id)
+    const party = await Party.find(id)
     if (!party) {
       return response.notFound({ message: 'Aucune soirée trouvée.' })
     }
@@ -43,7 +43,7 @@ export default class PartiesController {
       is_private: schema.boolean(),
     })
 
-    const payload: any = await request.validate({ schema: partiesSchema })
+    const payload = await request.validate({ schema: partiesSchema })
     const party: Party = await Party.create(payload)
 
     return response.ok(party)
@@ -64,9 +64,9 @@ export default class PartiesController {
 
     const payload: any = await request.validate({ schema: partiesSchema })
 
-    const { id }: { id: Number } = params
+    const { id } = params
 
-    const party: any = await Party.find(id)
+    const party = await Party.find(id)
     if (!party) {
       return response.notFound({ message: 'Aucune soirée trouvé.' })
     }
@@ -86,9 +86,9 @@ export default class PartiesController {
    * @responseBody 404 - Aucune soirée ne corresponds à l'id donné.
    */
   public async destroy({ params, response }: HttpContextContract) {
-    const { id }: { id: Number } = params
+    const { id } = params
 
-    const party: any = await Party.find(id)
+    const party = await Party.find(id)
     if (!party) {
       return response.notFound({ message: 'Aucune soirée trouvé' })
     }
