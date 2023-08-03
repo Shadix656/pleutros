@@ -44,7 +44,7 @@ export default class PartiesController {
     })
 
     const payload = await request.validate({ schema: partiesSchema })
-    const party: Party = await Party.create(payload)
+    const party = await Party.create(payload)
 
     return response.ok(party)
   }
