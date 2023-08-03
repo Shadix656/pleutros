@@ -62,7 +62,7 @@ export default class PartiesController {
       is_private: schema.boolean(),
     })
 
-    const payload: any = await request.validate({ schema: partiesSchema })
+    const payload = await request.validate({ schema: partiesSchema })
 
     const { id } = params
 
