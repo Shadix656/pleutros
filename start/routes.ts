@@ -34,3 +34,5 @@ Route.post('/auth/register', 'AuthController.register')
 Route.post('/auth/login', 'AuthController.login')
 
 Route.resource('parties', 'PartiesController').except(['create', 'edit'])
+
+Route.resource('bde', 'BdesController').except(['create', 'edit'])
