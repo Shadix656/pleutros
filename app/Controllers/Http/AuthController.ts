@@ -21,7 +21,7 @@ export default class AuthController {
         username: schema.string({ trim: true }, [rules.maxLength(255)]),
       })
 
-      const payload: any = await request.validate({ schema: registerSchema })
+      const payload = await request.validate({ schema: registerSchema })
       const user = await User.create(payload)
 
       const token = await auth.use('api').attempt(payload.email, payload.password)
