@@ -24,7 +24,7 @@ export default class PartiesController {
    * @responseBody 404
    */
   public async show({ params, response }) {
-    const { id }: { id: Number } = params
+    const { id }: { id: number } = params
 
     const party: any = await Party.find(id)
     if (!party) {
