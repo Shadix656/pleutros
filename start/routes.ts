@@ -32,5 +32,7 @@ Route.get('/docs', async () => {
 
 Route.post('/auth/register', 'AuthController.register')
 Route.post('/auth/login', 'AuthController.login')
+Route.post('/auth/logout', 'AuthController.logout')
+Route.get('/auth/me', 'AuthController.show').middleware('auth')
 
 Route.resource('parties', 'PartiesController').except(['create', 'edit'])
