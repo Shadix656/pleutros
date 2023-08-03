@@ -1,0 +1,46 @@
+version: '3'
+
+silent: true
+
+env:
+  compose: "docker compose"
+  console: "{{.compose}} exec adonis_app node ace"
+
+tasks:
+  build:
+    desc: Build container docker
+    cmds:
+      - "{{.compose}} build --pull --no-cache"
+  up:
+    desc: Démarre le container docker
+    cmds:
+      - "{{.compose}} up --detach"
+      -   task: ace
+          vars:
+            CLI_ARGS: migration:run
+  start:
+    desc: Build et démarre le container docker
+    cmds:
+      -   task: build
+      -   task: up
+  down:
+    desc: Arrête le container docker
+    cmds:
+      - "{{.compose}} down --remove-orphans"
+  restart:
+    desc: Redémarre le container docker
+    cmds:
+      -   task: down
+      -   task: up
+  ace:
+    desc: Adonis console
+    cmds:
+      - "{{.console}} {{.CLI_ARGS}}"
+  compose:
+    desc: Docker compose
+    cmds:
+      - "{{.compose}} {{.CLI_ARGS}}"
+  logs:
+    desc: Affiche les logs du container docker
+    cmds:
+      - "{{.compose}} logs --tail=0 --follow"
