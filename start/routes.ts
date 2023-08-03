@@ -36,3 +36,5 @@ Route.post('/auth/logout', 'AuthController.logout')
 Route.get('/auth/me', 'AuthController.show').middleware('auth')
 
 Route.resource('parties', 'PartiesController').except(['create', 'edit'])
+
+Route.resource('bde', 'BdesController').except(['create', 'edit'])
