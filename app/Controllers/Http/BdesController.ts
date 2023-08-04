@@ -45,9 +45,13 @@ export default class BdesController {
     })
 
     const payload = await request.validate({ schema: bdeSchema })
-    const bde: Bde = await Bde.create(payload)
 
-    return response.ok(bde)
+    try {
+      const bde: Bde = await Bde.create(payload)
+      return response.ok(bde)
+    } catch (e) {
+      return response.unprocessableEntity(e)
+    }
   }
 
   /**
@@ -73,11 +77,15 @@ export default class BdesController {
       return response.notFound({ message: 'Aucun bde trouvé.' })
     }
 
-    bde.merge(payload)
+    try {
+      bde.merge(payload)
 
-    await bde.save()
+      await bde.save()
 
-    return response.ok(bde)
+      return response.ok(bde)
+    } catch (e) {
+      return response.unprocessableEntity(e)
+    }
   }
 
   /**
